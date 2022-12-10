@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>快速开始</title>
+    <script type="module" src="./helper.js"></script>
+    <script src="../../lib/my-single-spa.umd.cjs"></script>
+  </head>
+  <body>
+    <common-header> </common-header>
+    <common-submenu></common-submenu>
+
+    <div id="app"></div>
+  </body>
+
+  <script>
+    const loadAppPromise = app => {
+      return () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve({
+              bootstrap: [app.bootstrap],
+              mount: [app.mount],
+              unmount: [app.unmount],
+              unload: [app.unload]
+            })
+          }, 200)
+        })
+    }
+    const app1 = {
+      container: null,
+      bootstrap: async props => {
+        app1.container = document.getElementById('app')
+        app1.container.innerHTML = 'bootstrapping'
+      },
+      mount: async props => {
+        app1.container.innerHTML = `<span style="color: red">APP1</span> 已挂载</br> ${new Date()}`
+        console.log(`${props.name} 已挂载`)
+      },
+      unmount: async props => {
+        app1.container.innerHTML = ''
+        console.log(`${props.name} 已卸载`)
+      },
+      unload: async props => {
+        delete app1.container
+        console.log(`${props.name} 已注销`)
+      }
+    }
+    const app2 = {
+      container: null,
+      bootstrap: async props => {
+        // function route() {
+        //   console.log('注册 app1 的路由事件', arguments)
+        // }
+        // window.addEventListener('hashchange', route)
+        app2.container = document.getElementById('app')
+        app2.container.innerHTML = 'bootstrapping'
+      },
+      mount: async props => {
+        app2.container.innerHTML = '<span style="color: blue">APP2</span> 已挂载'
+        console.log(`${props.name} 已挂载`)
+      },
+      unmount: async props => {
+        app2.container.innerHTML = ''
+        console.log(`${props.name} 已卸载`)
+      },
+      unload: async props => {
+        delete app2.container
+        console.log(`${props.name} 已注销`)
+      }
+    }
+
+    // 注册子应用
+    mySingleSpa.registerApplication('app1', loadAppPromise(app1), location => location.hash === '#/app1')
+
+    mySingleSpa.registerApplication('app2', loadAppPromise(app2), location => location.hash === '#/app2')
+
+    mySingleSpa.start()
+  </script>
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "my-single-spa",
+  "version": "1.0.0",
+  "description": "实现 single-spa",
+  "type": "module",
+  "main": "./dist/my-single-spa.umd.cjs",
+  "module": "./dist/my-single-spa.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-single-spa.js",
+      "require": "./dist/my-single-spa.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqlnice/my-single-spa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sqlnice/my-single-spa/issues"
+  },
+  "homepage": "https://github.com/sqlnice/my-single-spa#readme",
+  "devDependencies": {
+    "vite": "^3.2.5"
+  }
+}
