@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>systemjs</title>
+    <script type="module" src="../helper.js"></script>
+    <script src="../../lib/my-single-spa.umd.cjs"></script>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "app1": "http://localhost:5173/examples/systemjs/app1.js",
+          "app2": "http://localhost:5173/examples/systemjs/app2.js"
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/import-map-overrides@1.7.2/dist/import-map-overrides.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/system.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/amd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-exports.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-register.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/use-default.min.js"></script>
+  </head>
+  <body>
+    <common-header> </common-header>
+    <common-submenu></common-submenu>
+
+    <div id="app"></div>
+  </body>
+
+  <script>
+    // 注册子应用
+    mySingleSpa.registerApplication(
+      'app1',
+      () => System.import('app1'),
+      location => location.hash === '#/app1'
+    )
+
+    mySingleSpa.registerApplication(
+      'app2',
+      () => System.import('app2'),
+      location => location.hash === '#/app2'
+    )
+
+    mySingleSpa.start()
+  </script>
+</html>

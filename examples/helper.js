@@ -5,15 +5,15 @@ const menus = [
   },
   {
     name: 'systemjs 版本',
-    href: '/examples/systemjs.html'
+    href: '/examples/systemjs/index.html'
   },
   {
     name: 'Vuejs 版本',
-    href: '/examples/vue.html'
+    href: '/examples/vue/index.html'
   },
   {
     name: 'React 版本',
-    href: '/examples/react.html'
+    href: '/examples/react/index.html'
   }
 ]
 customElements.define(
