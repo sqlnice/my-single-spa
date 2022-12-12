@@ -10,10 +10,6 @@ const menus = [
   {
     name: 'Vuejs 版本',
     href: '/examples/vue/index.html'
-  },
-  {
-    name: 'React 版本',
-    href: '/examples/react/index.html'
   }
 ]
 customElements.define(
