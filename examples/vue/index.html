@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script type="module" src="../helper.js"></script>
+    <script src="../../lib/my-single-spa.umd.cjs"></script>
+    <!-- Vue 插件 -->
+    <script src="../../plugins/my-single-spa-vue.js"></script>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "app1": "http://localhost:5173/examples/vue/app1.js",
+          "app2": "http://localhost:5173/examples/vue/app2.js",
+          "vue": "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js",
+          "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/import-map-overrides@1.7.2/dist/import-map-overrides.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/system.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/amd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-exports.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/named-register.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.1.1/extras/use-default.min.js"></script>
+  </head>
+  <body>
+    <common-header> </common-header>
+    <common-submenu></common-submenu>
+
+    <div id="app"></div>
+  </body>
+
+  <script>
+    Promise.all([System.import('vue'), System.import('vue-router')]).then(modules => {
+      window.Vue = modules[0]
+      window.VueRouter = modules[1]
+
+      Vue.use(VueRouter)
+
+      // 注册子应用
+      mySingleSpa.registerApplication(
+        'app1',
+        () => System.import('app1'),
+        location => location.hash === '#/app1'
+      )
+
+      mySingleSpa.registerApplication(
+        'app2',
+        () => System.import('app2'),
+        location => location.hash === '#/app2'
+      )
+
+      mySingleSpa.start()
+    })
+  </script>
+</html>
