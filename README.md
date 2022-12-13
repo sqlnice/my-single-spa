@@ -1,6 +1,24 @@
 # my-single-spa
 
+[操作示例](https://github.com/sqlnice/my-single-spa/raw/main/handle.gif)
+
 > 简易版 single-spa
+
+## 快速开始
+
+```shell
+$ npm i
+```
+
+```shell
+$ npm run div
+```
+
+```shell
+$ npm run build
+```
+
+在浏览器访问 `http://localhost:5173/`
 
 已实现:
 
