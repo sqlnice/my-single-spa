@@ -1,6 +1,6 @@
 # my-single-spa
 
-[操作示例](https://github.com/sqlnice/my-single-spa/raw/main/handle.gif)
+[操作示例](https://raw.githubusercontent.com/sqlnice/my-single-spa/main/handle.gif)
 
 > 简易版 single-spa
 
